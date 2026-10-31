@@ -18,7 +18,9 @@ A DeepSeek Harness plugin that keeps agents from repeating the same mistakes.
    | `node-inline` | `node -e …` or an Electron binary run as Node with `-e` | always |
    | `node-not-on-path` | `node …` | no `node` on PATH |
    | `pipe-script-to-wsl` | `… \| wsl …` | always |
-   | `run-new-ps1` | running a `.ps1` without `-ExecutionPolicy Bypass` | the policy blocks local scripts |
+   | `run-new-ps1` | running a `.ps1` without `-ExecutionPolicy Bypass` | the policy refuses local scripts (`Restricted`, `AllSigned`; not `RemoteSigned`) |
+
+   A command that a check refuses wrongly can opt out of that one check with a trailing comment, `# guardrails: allow <id>`; the refusal tells the agent to do this only after verifying, and to tell the user why.
 
 3. **Self-evolution**: the `guardrail_add_lesson` tool. After an avoidable mistake the agent records a one-line rule (global, or for the current project). Near-duplicates of an existing rule are refused. The tool result names the rule and the file, and tells the agent to report both to the user; the rule is in the prompt of every later session. The file is plain JSON: edit or delete entries freely.
 

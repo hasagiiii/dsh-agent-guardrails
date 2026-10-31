@@ -62,6 +62,8 @@ await test('environment decides: PowerShell 7 accepts what 5.1 rejects', () => {
   assert.deepEqual(ids('node tools/x.mjs', ps7), []);
   assert.deepEqual(checkCommand('bash', 'a && b', ps51), [], 'bash tool is not PowerShell');
   assert.deepEqual(checkCommand('pwsh', 'a && b', ps51, ['ps51-operators']), [], 'disabled checks');
+  assert.deepEqual(ids("& '.scratch/x.ps1' # guardrails: allow run-new-ps1"), [], 'a verified exception opts out per command');
+  assert.deepEqual(ids("a && b # guardrails: allow run-new-ps1"), ['ps51-operators'], 'only the named check');
 });
 
 await test('the refusal names the reason and the working form', () => {

@@ -1,0 +1,7 @@
+# Keeps agents from repeating mistakes: learned rules in the system prompt,
+# a gate for shell commands that fail every time here, and the
+# guardrail_add_lesson tool. Adds to the composition; replaces nothing.
+- insert:
+    - id: agent-guardrails
+      name: dsh-agent-guardrails
+      config: {}
